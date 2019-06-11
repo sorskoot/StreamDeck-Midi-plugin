@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>MyPlugin Property Inspector</title>
+    <link rel="stylesheet" href="css/sdpi.css">
+    <link rel="stylesheet" href="css/property-inspector.css">
+</head>
+
+<body>
+
+    <div class="sdpi-wrapper">
+        <div class="sdpi-item" id="devices">
+            <div class="sdpi-item-label">Midi Device</div>
+            <select id="selDevices" class="sdpi-item-value select"
+                onchange="setSettings(event.target.value, 'SelectedDevice')" />
+            </select>
+        </div>
+
+        <div class="sdpi-item" id="channel_value">
+            <div class="sdpi-item-label">Midi Channel</div>
+            <input id="txtChannel" class="sdpi-item-value" type="number" inputmode="numeric" pattern="[0-9]*"
+                placeholder="Enter midi channel" onchange="setSettings(event.target.value, 'Channel')" />
+        </div>
+
+        <div class="sdpi-item" id="note_value">
+            <div class="sdpi-item-label">Midi Note</div>
+            <input id="txtNote" class="sdpi-item-value" type="number" inputmode="numeric" pattern="[0-9]*"
+                placeholder="Enter midi note" onchange="setSettings(event.target.value, 'Note')" />
+        </div>
+    </div>
+    <script src="js/property-inspector.js"></script>
+</body>
+
+</html>

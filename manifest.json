@@ -1,0 +1,40 @@
+{
+    "Actions": [
+        {
+            "Icon": "images/actionIcon",
+            "Name": "Send Midi",
+            "States": [
+                {
+                    "Image": "images/actionDefaultImage",
+                    "TitleAlignment": "middle",
+                    "FontSize": "10"
+                }
+            ],
+            "SupportedInMultiActions": false,
+            "Tooltip": "Send Midi notes",
+            "UUID": "com.sorskoot.midi.action"
+        }
+    ],
+    "Category": "Midi",
+    "CategoryIcon": "images/category/categoryIcon.png",
+    "Disabled": false,
+    "Author": "Sorskoot",
+    "CodePathWin": "StreamDeckMidiPlugin2.exe",
+    "CodePathMac": "StreamDeckMidiPlugin2",
+    "PropertyInspectorPath": "property_inspector/property_inspector.html",
+    "Description": "Send Midi Notes",
+    "Name": "Midi",
+    "Icon": "images/pluginIcon",
+    "URL": "https://www.elgato.com/gaming/stream-deck",
+    "Version": "1.05",
+    "SDKVersion": 2,
+    "Software": {
+        "MinimumVersion": "4.1"
+    },
+    "OS": [
+        {
+            "Platform": "windows",
+            "MinimumVersion": "10"
+        }
+    ]
+}
