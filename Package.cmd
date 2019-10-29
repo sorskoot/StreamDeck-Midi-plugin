@@ -1,0 +1,1 @@
+C:\tools\DistributionTool.exe -b -i .\bin\Release\netcoreapp2.2\com.sorskoot.midi.sdPlugin\ -o Release

@@ -29,12 +29,13 @@ namespace StreamDeckMidiPlugin2
 
         public void Midi(int deviceIndex, int channel, int note)
         {
-            IMidiOutputDeviceInfo inputDeviceInfo = MidiDeviceManager.Default.OutputDevices.ElementAt(deviceIndex);
+            IMidiOutputDeviceInfo inputDeviceInfo = 
+                MidiDeviceManager.Default.OutputDevices.ElementAt(deviceIndex);
             IMidiOutputDevice outputDevice = inputDeviceInfo.CreateDevice();
 
             RtMidi.Core.Enums.Channel midiChannel = (RtMidi.Core.Enums.Channel)channel - 1;
             RtMidi.Core.Enums.Key midiNote = (RtMidi.Core.Enums.Key)note;
-
+           
             outputDevice.Open();
             outputDevice.Send(new NoteOnMessage(midiChannel, midiNote, 127));
             outputDevice.Close();

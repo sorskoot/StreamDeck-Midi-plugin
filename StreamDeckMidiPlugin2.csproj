@@ -19,6 +19,7 @@
 
 	<!--Dependencies-->
 	<ItemGroup>
+		<PackageReference Include="managed-midi" Version="1.9.12" />
 		<PackageReference Include="RtMidi.Core" Version="1.0.50" />
 		<PackageReference Include="StreamDeckLib" Version="0.4.480" />
 		<PackageReference Include="StreamDeckLib.Config" Version="0.4.480" />

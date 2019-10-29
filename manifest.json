@@ -2,7 +2,7 @@
     "Actions": [
         {
             "Icon": "images/actionIcon",
-            "Name": "Send Midi",
+            "Name": "Send Midi Note On",
             "States": [
                 {
                     "Image": "images/actionDefaultImage",
@@ -13,6 +13,20 @@
             "SupportedInMultiActions": false,
             "Tooltip": "Send Midi notes",
             "UUID": "com.sorskoot.midi.action"
+        },
+        {
+            "Icon": "images/actionIcon",
+            "Name": "Send Midi Control Message",
+            "States": [
+                {
+                    "Image": "images/actionDefaultImage",
+                    "TitleAlignment": "middle",
+                    "FontSize": "10"
+                }
+            ],
+            "SupportedInMultiActions": false,
+            "Tooltip": "Send Midi Control Messsages",
+            "UUID": "com.sorskoot.midi.controller-action"
         }
     ],
     "Category": "Midi",

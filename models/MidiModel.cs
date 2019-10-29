@@ -14,6 +14,8 @@ namespace StreamDeckMidiPlugin2.Models
         public int Channel { get; set; } = 1;
         public int Note { get; set; } = 57;
         public int SelectedDevice { get; set; }
+        public int Value {get;set;} = 0;
+        public int Control {get;set;} = 0;
         public string[] Devices { get;set;}
     }
 }

@@ -9,7 +9,9 @@ var websocket = null,
         Channel: 1,
         Note: 57,
         SelectedDevice: "0",
-        Devices:[]
+        Devices:[],
+        Value:0,
+        Control:0
     };
 
 function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, inActionInfo) {
@@ -23,6 +25,7 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     //initialize values
     if (actionInfo.payload.settings.settingsModel) {
         settingsModel.Note = actionInfo.payload.settings.settingsModel.Note;
+        settingsModel.Channel = actionInfo.payload.settings.settingsModel.Channel;
         settingsModel.Channel = actionInfo.payload.settings.settingsModel.Channel;
         settingsModel.Devices = actionInfo.payload.settings.settingsModel.Devices;
         settingsModel.SelectedDevice = actionInfo.payload.settings.settingsModel.SelectedDevice;
