@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using RtMidi.Core;
 
 namespace StreamDeckMidiPlugin2.Models
@@ -8,7 +7,7 @@ namespace StreamDeckMidiPlugin2.Models
     {
         public MidiModel()
         {
-            this.Devices = MidiDeviceManager.Default.OutputDevices.Select(d => d.Name).ToArray();
+            this.Devices= MidiDeviceManager.Default.OutputDevices.Select(d => d.Name).ToArray();
         }
 
         public int Channel { get; set; } = 1;
@@ -16,6 +15,6 @@ namespace StreamDeckMidiPlugin2.Models
         public int SelectedDevice { get; set; }
         public int Value {get;set;} = 0;
         public int Control {get;set;} = 0;
-        public string[] Devices { get;set;}
+        public string[] Devices { get; private set; }
     }
 }

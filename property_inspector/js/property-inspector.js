@@ -17,7 +17,6 @@ var websocket = null,
 function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, inActionInfo) {
     uuid = inUUID;
     actionInfo = JSON.parse(inActionInfo);
-    console.log(inActionInfo);
 
     inInfo = JSON.parse(inInfo);
     websocket = new WebSocket('ws://localhost:' + inPort);
@@ -25,7 +24,6 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
     //initialize values
     if (actionInfo.payload.settings.settingsModel) {
         settingsModel.Note = actionInfo.payload.settings.settingsModel.Note;
-        settingsModel.Channel = actionInfo.payload.settings.settingsModel.Channel;
         settingsModel.Channel = actionInfo.payload.settings.settingsModel.Channel;
         settingsModel.Devices = actionInfo.payload.settings.settingsModel.Devices;
         settingsModel.SelectedDevice = actionInfo.payload.settings.settingsModel.SelectedDevice;
@@ -85,6 +83,7 @@ function updateUI() {
     document.getElementById('txtNote').value = settingsModel.Note;
     document.getElementById('txtChannel').value = settingsModel.Channel;
     let newSelect = document.getElementById('selDevices');
+    newSelect.innerHTML = '';
     for (let i = 0; i < settingsModel.Devices.length; i++) {
         const element = settingsModel.Devices[i];
         var opt = document.createElement("option");

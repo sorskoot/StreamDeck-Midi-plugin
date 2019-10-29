@@ -107,5 +107,8 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Release\" />
+	</ItemGroup>
 
 </Project>

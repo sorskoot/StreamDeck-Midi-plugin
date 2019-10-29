@@ -15,16 +15,16 @@ namespace StreamDeckMidiPlugin2
     [ActionUuid(Uuid = "com.sorskoot.midi.action")]
     public class MidiNoteAction : BaseStreamDeckActionWithSettingsModel<Models.MidiModel>
     {
-        public override async Task OnWillAppear(StreamDeckEventPayload args){
-            await base.OnWillAppear(args);
-            await Manager.SetSettingsAsync(args.context, SettingsModel);
+        public override async Task OnPropertyInspectorDidAppear(StreamDeckEventPayload args)
+        {
+            await this.Manager.SetSettingsAsync(args.context, this.SettingsModel);
+            await base.OnPropertyInspectorDidAppear(args);
         }
 
-        public override async Task OnKeyUp(StreamDeckEventPayload args)
+        public override Task OnKeyDown(StreamDeckEventPayload args)
         {
-            Midi(this.SettingsModel.SelectedDevice, this.SettingsModel.Channel, this.SettingsModel.Note);
-            //update settings
-            await Manager.SetSettingsAsync(args.context, SettingsModel);
+            this.Midi(this.SettingsModel.SelectedDevice, this.SettingsModel.Channel, this.SettingsModel.Note);
+            return Task.CompletedTask;
         }
 
         public void Midi(int deviceIndex, int channel, int note)

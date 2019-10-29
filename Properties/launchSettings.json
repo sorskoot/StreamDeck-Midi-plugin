@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "StreamDeckMidiPlugin2": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Elgato\\StreamDeck\\StreamDeck.exe",
+      "nativeDebugging": true
+    }
+  }
+}
