@@ -26,7 +26,7 @@
   "Name": "Midi",
   "Icon": "images/pluginIcon",
   "URL": "https://www.elgato.com/gaming/stream-deck",
-  "Version": "1.1",
+  "Version": "1.2",
   "SDKVersion": 2,
   "Software": {
     "MinimumVersion": "4.1"
