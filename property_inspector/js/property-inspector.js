@@ -9,9 +9,7 @@ var websocket = null,
         Channel: 1,
         Note: 57,
         SelectedDevice: "0",
-        Devices:[],
-        Value:0,
-        Control:0
+        Devices:[]
     };
 
 function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, inActionInfo) {
