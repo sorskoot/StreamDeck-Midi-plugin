@@ -11,12 +11,13 @@ using System;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-
 namespace StreamDeckMidiPlugin2
 {
-    [ActionUuid(Uuid = "com.sorskoot.midi.action")]
-    public class MidiNoteAction : BaseStreamDeckActionWithSettingsModel<Models.MidiModel>
+
+    [ActionUuid(Uuid = "com.sorskoot.midicc.action")]
+    public class MidiCCAction : BaseStreamDeckActionWithSettingsModel<Models.MidiCCModel>
     {
+        
 
         public override Task OnWillAppear(StreamDeckEventPayload args)
         {
@@ -30,7 +31,6 @@ namespace StreamDeckMidiPlugin2
             {
                 MidiDevice.outputDevice = inputDeviceInfo.CreateDevice();
             }
-
             if (!MidiDevice.outputDevice.IsOpen)
             {
                 MidiDevice.outputDevice.Open();
@@ -38,7 +38,6 @@ namespace StreamDeckMidiPlugin2
 
             return Task.CompletedTask;
         }
-
         public override Task OnWillDisappear(StreamDeckEventPayload args)
         {
             MidiDevice.outputDevice.Close();
@@ -55,15 +54,11 @@ namespace StreamDeckMidiPlugin2
         public override Task OnKeyDown(StreamDeckEventPayload args)
         {
             Log.Information("OnKeyDown");
-            this.MidiOn(this.SettingsModel.Channel, this.SettingsModel.Note);
+            this.MidiCC(this.SettingsModel.Channel, this.SettingsModel.Control, this.SettingsModel.Value);
             return Task.CompletedTask;
         }
 
-        public override Task OnKeyUp(StreamDeckEventPayload args)
-        {
-            this.MidiOff(this.SettingsModel.Channel, this.SettingsModel.Note);
-            return base.OnKeyUp(args);
-        }
+        
 
         public override Task OnDidReceiveSettings(StreamDeckEventPayload args)
         {
@@ -74,27 +69,12 @@ namespace StreamDeckMidiPlugin2
             return this.OnWillAppear(args);
         }
 
-        public void MidiOn(int channel, int note)
+        public void MidiCC(int channel, int control, int value)
         {
             var midiChannel = (Channel)(channel - 1);
-            var midiNote = (Key)note;
             if (MidiDevice.outputDevice.IsOpen)
             {
-                MidiDevice.outputDevice.Send(new NoteOnMessage(midiChannel, midiNote, 127));
-            }
-            else
-            {
-                Log.Warning("midi output device not connected");
-            }
-        }
-
-        public void MidiOff(int channel, int note)
-        {
-            var midiChannel = (Channel)(channel - 1);
-            var midiNote = (Key)note;
-            if (MidiDevice.outputDevice.IsOpen)
-            {
-                MidiDevice.outputDevice.Send(new NoteOffMessage(midiChannel, midiNote, 127));
+                MidiDevice.outputDevice.Send(new ControlChangeMessage(midiChannel, control, value));
             }
             else
             {
@@ -106,7 +86,7 @@ namespace StreamDeckMidiPlugin2
         // in model yet.
         private new void SetModelProperties(StreamDeckEventPayload args)
         {
-            PropertyInfo[] properties = typeof(Models.MidiModel).GetProperties();
+            PropertyInfo[] properties = typeof(Models.MidiCCModel).GetProperties();
             PropertyInfo[] array = properties;
             foreach (PropertyInfo propertyInfo in array)
             {
