@@ -1,12 +1,10 @@
-﻿using RtMidi.Core.Devices;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using RtMidi.Core.Devices;
 
 namespace StreamDeckMidiPlugin2
 {
     static class MidiDevice
     {
-        public static IMidiOutputDevice outputDevice;
+        public static Dictionary<int, IMidiOutputDevice> OutputDevices = new Dictionary<int, IMidiOutputDevice>();
     }
 }
