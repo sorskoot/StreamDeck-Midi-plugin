@@ -1,14 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 using RtMidi.Core;
 using RtMidi.Core.Devices.Infos;
 using Serilog;
 using StreamDeckLib;
 using StreamDeckLib.Messages;
 using StreamDeckMidiPlugin2.Models;
-using System.Threading.Tasks;
-using System.Reflection;
-using System;
-using Newtonsoft.Json.Linq;
 
 namespace StreamDeckMidiPlugin2
 {
@@ -21,30 +21,41 @@ namespace StreamDeckMidiPlugin2
 
             // This might go wrong when the order of devices change or devices are added/removed
             // We need to refer to the devices by name instead of index.
-            IMidiOutputDeviceInfo inputDeviceInfo =
-               MidiDeviceManager.Default.OutputDevices.ElementAt(this.SettingsModel.SelectedDevice);
+            IMidiOutputDeviceInfo inputDeviceInfo = this.GetOutputDeviceInfo(this.SettingsModel.SelectedDevice);
 
-            if (!MidiDevice.OutputDevices.ContainsKey(this.SettingsModel.SelectedDevice))
+            if (!MidiDevice.OutputDevices.ContainsKey(inputDeviceInfo.Name))
             {
                 MidiDevice.OutputDevices.Add(
-                    this.SettingsModel.SelectedDevice, inputDeviceInfo.CreateDevice());
+                    inputDeviceInfo.Name, inputDeviceInfo.CreateDevice());
             }
 
-            if (!MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].IsOpen)
+            if (!MidiDevice.OutputDevices[inputDeviceInfo.Name].IsOpen)
             {
-                MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].Open();
+                MidiDevice.OutputDevices[inputDeviceInfo.Name].Open();
             }
 
             return Task.CompletedTask;
         }
 
+        private IMidiOutputDeviceInfo GetOutputDeviceInfo(int selectedDevice)
+        {
+            return MidiDeviceManager.Default.OutputDevices.ElementAt(selectedDevice);
+        }
+
+        protected string GetSelectedDeviceName(int selectedDevice)
+        {
+            return this.GetOutputDeviceInfo(selectedDevice).Name;
+        }
+
         public override Task OnWillDisappear(StreamDeckEventPayload args)
         {
+            IMidiOutputDeviceInfo inputDeviceInfo = this.GetOutputDeviceInfo(this.SettingsModel.SelectedDevice);
+
             // Check if the Midi device is initialized and open
-            if (MidiDevice.OutputDevices.ContainsKey(this.SettingsModel.SelectedDevice) &&
-                MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].IsOpen)
+            if (MidiDevice.OutputDevices.ContainsKey(inputDeviceInfo.Name) &&
+                MidiDevice.OutputDevices[inputDeviceInfo.Name].IsOpen)
             {
-                MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].Close();
+                MidiDevice.OutputDevices[inputDeviceInfo.Name].Close();
             }
             return base.OnWillDisappear(args);
         }

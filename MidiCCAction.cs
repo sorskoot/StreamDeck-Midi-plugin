@@ -21,10 +21,11 @@ namespace StreamDeckMidiPlugin2
 
         public void MidiCC(int channel, int control, int value)
         {
+            
             var midiChannel = (Channel)(channel - 1);
-            if (MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].IsOpen)
+            if (MidiDevice.OutputDevices[this.GetSelectedDeviceName(this.SettingsModel.SelectedDevice)].IsOpen)
             {
-                MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].Send(new ControlChangeMessage(midiChannel, control, value));
+                MidiDevice.OutputDevices[this.GetSelectedDeviceName(this.SettingsModel.SelectedDevice)].Send(new ControlChangeMessage(midiChannel, control, value));
             }
             else
             {

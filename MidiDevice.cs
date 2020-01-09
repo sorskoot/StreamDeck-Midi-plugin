@@ -5,6 +5,6 @@ namespace StreamDeckMidiPlugin2
 {
     static class MidiDevice
     {
-        public static Dictionary<int, IMidiOutputDevice> OutputDevices = new Dictionary<int, IMidiOutputDevice>();
+        public static Dictionary<string, IMidiOutputDevice> OutputDevices = new Dictionary<string, IMidiOutputDevice>();
     }
 }

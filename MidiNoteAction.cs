@@ -29,9 +29,9 @@ namespace StreamDeckMidiPlugin2
         {
             var midiChannel = (Channel)(channel - 1);
             var midiNote = (Key)note;
-            if (MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].IsOpen)
+            if (MidiDevice.OutputDevices[this.GetSelectedDeviceName(this.SettingsModel.SelectedDevice)].IsOpen)
             {
-                MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].Send(new NoteOnMessage(midiChannel, midiNote, 127));
+                MidiDevice.OutputDevices[this.GetSelectedDeviceName(this.SettingsModel.SelectedDevice)].Send(new NoteOnMessage(midiChannel, midiNote, 127));
             }
             else
             {
@@ -43,9 +43,9 @@ namespace StreamDeckMidiPlugin2
         {
             var midiChannel = (Channel)(channel - 1);
             var midiNote = (Key)note;
-            if (MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].IsOpen)
+            if (MidiDevice.OutputDevices[this.GetSelectedDeviceName(this.SettingsModel.SelectedDevice)].IsOpen)
             {
-                MidiDevice.OutputDevices[this.SettingsModel.SelectedDevice].Send(new NoteOffMessage(midiChannel, midiNote, 127));
+                MidiDevice.OutputDevices[this.GetSelectedDeviceName(this.SettingsModel.SelectedDevice)].Send(new NoteOffMessage(midiChannel, midiNote, 127));
             }
             else
             {
